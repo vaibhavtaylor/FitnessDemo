@@ -184,12 +184,10 @@ public class MainActivity extends FragmentActivity {
     private Runnable updateTimerThread = new Runnable() {
         public void run() {
             timeInMilliseconds = (SystemClock.uptimeMillis() - startTime) * taskCounter;
-            Log.d("time", timeInMilliseconds+"");
             updatedTime = timeInMilliseconds;
             int secs = (int) (updatedTime / 1000);
             int mins = secs / 60;
             secs = (secs % 60);
-            Log.d("Sec", secs+"");
             int milliseconds = (int) (updatedTime % 100);
             timerText.setText("" + mins + ":"
                     + String.format("%02d", secs) + ":"
