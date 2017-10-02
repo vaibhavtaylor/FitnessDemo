@@ -1,6 +1,7 @@
 package com.example.vaibhav.fitnessdemo;
 
 import android.animation.Animator;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.support.design.widget.FloatingActionButton;
@@ -11,6 +12,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
@@ -91,18 +93,18 @@ public class MainActivity extends FragmentActivity {
 
                 //depending on which task is selected the timer is incremented by that amount
                 if (mPager.getCurrentItem() == 0)
-                    taskCounter = 1000;
+                    taskCounter = 1;
                 else if (mPager.getCurrentItem() == 1)
-                    taskCounter = 2000;
+                    taskCounter = 2;
                 else if (mPager.getCurrentItem() == 2)
-                    taskCounter = 5000;
+                    taskCounter = 5;
                 else if(mPager.getCurrentItem() == 3)
-                    taskCounter = 10000;
+                    taskCounter = 10;
 
                 if(goButtonText.getText().toString().equals("GO")) {
                     timerText.setText("00:00:00");
                     startTime = SystemClock.uptimeMillis();
-                    customHandler.postDelayed(updateTimerThread, 0);
+                    customHandler.postDelayed(updateTimerThread, 1000);
                     rippleBackground.startRippleAnimation();
                 }
                 else {
@@ -181,16 +183,18 @@ public class MainActivity extends FragmentActivity {
     //timer update counter thread
     private Runnable updateTimerThread = new Runnable() {
         public void run() {
-            timeInMilliseconds = SystemClock.uptimeMillis() - startTime;
-            updatedTime = timeSwapBuff + timeInMilliseconds + taskCounter;
+            timeInMilliseconds = (SystemClock.uptimeMillis() - startTime) * taskCounter;
+            Log.d("time", timeInMilliseconds+"");
+            updatedTime = timeInMilliseconds;
             int secs = (int) (updatedTime / 1000);
             int mins = secs / 60;
-            secs = secs % 60;
+            secs = (secs % 60);
+            Log.d("Sec", secs+"");
             int milliseconds = (int) (updatedTime % 100);
             timerText.setText("" + mins + ":"
                     + String.format("%02d", secs) + ":"
                     + String.format("%02d", milliseconds));
-            customHandler.postDelayed(this, 0);
+            customHandler.postDelayed(this, 1000);
         }
     };
 
