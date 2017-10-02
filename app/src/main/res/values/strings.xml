@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">FITNESS</string>
+    <string name="distance">Distance Travelled: 10Km</string>
+    <string name="calories">Calorie Burnt: 102</string>
+    <string name="heartbeat">Heart Rate: 100 bpm</string>
+    <string name="gobutton">GO</string>
+    <string name="distanceunit">Km</string>
+    <string name="time">Time</string>
+    <string name="caltext">Calories</string>
+</resources>
